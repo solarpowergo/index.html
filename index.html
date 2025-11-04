@@ -1,239 +1,277 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Sahara Premium Wear — صحراء</title>
-<meta name="description" content="Premium desert-inspired fashion. Hoodie $85 · Pants $65 · Set $140">
-<meta name="theme-color" content="#D4AF37">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Sahara Premium Wear — Hoodie & Pants</title>
+<meta name="description" content="Sahara Premium Wear. Hoodie $85, Pants $65, Bundle $140. Minimal, modern shop with visual cart.">
 <style>
   :root{
-    --bg:#0a0a0a;          /* deep black */
-    --panel:#111010;       /* card bg */
-    --line:#262018;        /* thin borders */
-    --gold:#d4af37;        /* warm gold */
-    --gold-2:#b98c24;      /* darker gold */
-    --text:#f3efe7;        /* ivory */
-    --muted:#b9ad99;       /* muted text */
-    --shadow:0 18px 60px rgba(0,0,0,.45);
+    --bg:#ffffff; --ink:#111111; --muted:#6b6b6b; --line:#eeeeee;
+    --tile:#f7f7f7; --accent:#0f0f0f; --accentText:#fff; --beige:#f4efe6;
   }
-  *,*:before,*:after{box-sizing:border-box}
-  html,body{margin:0;background:var(--bg);color:var(--text);
-    font-family: ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial}
+  *{box-sizing:border-box} html,body{margin:0;background:var(--bg);color:var(--ink);
+    font-family: ui-sans-serif,-apple-system,Segoe UI,Roboto,Arial; line-height:1.35}
   a{color:inherit;text-decoration:none}
+  .wrap{max-width:1200px;margin:0 auto;padding:0 18px}
 
-  /* Lux frame */
-  .frame:before,.frame:after{content:"";position:fixed;inset:14px;
-    border:1px solid rgba(212,175,55,.32);pointer-events:none;border-radius:8px}
-  .frame:after{inset:26px;border-color:rgba(212,175,55,.18)}
-
-  .wrap{max-width:1180px;margin:0 auto;padding:0 20px}
-
-  /* NAV */
-  .nav{position:sticky;top:0;z-index:50;background:rgba(10,10,10,.6);
-       backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+  /* Header */
+  .nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);
+       -webkit-backdrop-filter:saturate(1.2) blur(10px); backdrop-filter:saturate(1.2) blur(10px);
+       border-bottom:1px solid var(--line)}
   .navin{height:68px;display:flex;align-items:center;justify-content:space-between}
-  .brand{display:flex;flex-direction:column;line-height:1}
-  .brand .ar{font-weight:900;color:var(--gold);font-size:26px;letter-spacing:.6px}
-  .brand .en{color:var(--muted);letter-spacing:.30em;margin-top:6px}
-  .links a{margin-left:18px;color:var(--muted);font-weight:700}
-  .links a:hover{color:var(--text)}
+  .brand{font-weight:900;letter-spacing:.18em}
+  .brand .ar{font-weight:900;margin-left:.6ch}
+  .links a{margin-left:18px;color:var(--muted);font-weight:600}
+  .links a:hover{color:var(--ink)}
+  .cartbtn{position:relative;border:1px solid var(--line);padding:10px 14px;border-radius:12px;font-weight:800}
+  .badge{position:absolute;right:-7px;top:-7px;background:#111;color:#fff;border-radius:999px;
+         height:20px;min-width:20px;font-size:12px;display:grid;place-items:center;padding:0 5px}
 
-  /* HERO */
-  .hero{
-    position:relative;border-bottom:1px solid var(--line);
-    background:
-      radial-gradient(1200px 600px at 50% -220px, rgba(212,175,55,.16), transparent 60%);
-  }
-  .hero .inner{display:grid;grid-template-columns:1.2fr .8fr;gap:32px;padding:72px 0}
-  .logoLockup{opacity:0;transform:translateY(10px);animation:fadeUp .9s .1s both}
-  .kicker{color:var(--muted);text-transform:uppercase;letter-spacing:.25em;font-size:12px}
-  h1{margin:8px 0 12px;line-height:1.05;font-size:48px}
-  h1 .ar{color:var(--gold);font-weight:900;letter-spacing:.6px;display:block}
-  h1 .en{font-weight:800;display:block}
+  /* Hero */
+  .hero{background:var(--beige);border-bottom:1px solid var(--line)}
+  .hero-in{display:grid;grid-template-columns:1.1fr .9fr;gap:28px;padding:46px 0}
+  .hero h1{font-size:40px;margin:6px 0 8px}
   .sub{color:var(--muted);max-width:56ch}
-  .cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:20px}
-  .btn{padding:13px 20px;border-radius:12px;border:1.5px solid var(--gold);
-       font-weight:900;letter-spacing:.04em;transition:.25s}
-  .btn.primary{background:linear-gradient(180deg,var(--gold),var(--gold-2));color:#1c1408;
-               box-shadow:0 0 0 rgba(212,175,55,.45);animation:glow 2.6s ease-in-out infinite}
-  .btn:hover{transform:translateY(-1px);box-shadow:0 10px 26px rgba(212,175,55,.18)}
+  .cta{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+  .btn{padding:13px 18px;border-radius:12px;font-weight:800}
+  .btn.primary{background:var(--accent);color:var(--accentText)}
+  .btn.ghost{border:1px solid var(--ink)}
+  .hero-img{border-radius:16px;overflow:hidden;background:#000}
+  .hero-img img{width:100%;display:block;object-fit:cover;height:100%}
 
-  /* INFO tile */
-  .tile{align-self:center;background:linear-gradient(180deg,#141311,#0e0d0c);
-        border:1px solid var(--line);border-radius:18px;padding:18px 18px 20px;
-        box-shadow:var(--shadow)}
-  .tile .small{color:var(--muted);text-transform:uppercase;letter-spacing:.18em;font-size:12px}
-  .tile .title{font-weight:800;margin-top:4px}
-  .tile .note{color:var(--muted);margin-top:6px}
+  /* Grid */
+  .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;padding:26px 0 60px}
+  .card{border:1px solid var(--line);border-radius:16px;overflow:hidden;background:var(--tile)}
+  .pic{aspect-ratio:4/5;background:#000}
+  .pic img{width:100%;height:100%;object-fit:cover;display:block}
+  .info{padding:16px;background:#fff}
+  .row{display:flex;justify-content:space-between;align-items:center;gap:10px}
+  .title{font-weight:800}
+  .price{font-weight:900}
+  .muted{color:var(--muted)}
+  .controls{margin-top:12px;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+  select, .qty{border:1px solid var(--line);border-radius:10px;padding:10px 12px;font-weight:600;background:#fff}
+  .add{background:#111;color:#fff;border:none;padding:12px 16px;border-radius:12px;font-weight:900}
+  .add:active{transform:translateY(1px)}
 
-  /* SECTIONS */
-  .sec{padding:36px 0}
-  .grid{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
-  .card{background:linear-gradient(180deg,#141311,#0f0e0d);
-        border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:var(--shadow);
-        transform:translateY(12px);opacity:0}
-  .card.show{transform:none;opacity:1;transition:.6s ease}
-  .imgbox{aspect-ratio:1/1;background:#0b0a09;display:flex;align-items:center;justify-content:center}
-  .imgbox img{width:100%;height:100%;object-fit:cover}
-  .info{padding:18px}
-  .title{font-weight:800;letter-spacing:.02em}
-  .price{color:var(--gold);font-weight:900;margin-top:4px}
-  .small{color:var(--muted);font-size:.94rem}
-  .sep{height:1px;background:linear-gradient(90deg,transparent,rgba(212,175,55,.35),transparent);margin:18px 0}
+  /* Cart drawer */
+  .cart{position:fixed;top:0;right:0;height:100dvh;width:min(420px,100%);background:#fff;
+        transform:translateX(100%);transition:.28s ease;z-index:60;border-left:1px solid var(--line);
+        display:flex;flex-direction:column}
+  .cart.open{transform:none}
+  .cart-head{padding:18px 18px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center}
+  .cart-items{padding:10px 18px;overflow:auto;flex:1}
+  .ci{display:grid;grid-template-columns:64px 1fr auto;gap:12px;align-items:center;border-bottom:1px solid var(--line);padding:12px 0}
+  .ci img{width:64px;height:80px;object-fit:cover;border-radius:8px}
+  .ci .name{font-weight:800}
+  .ci .meta{color:var(--muted);font-size:13px}
+  .ci .qtybox{display:flex;gap:8px;align-items:center}
+  .btnsm{border:1px solid var(--line);background:#fff;border-radius:8px;padding:6px 10px;font-weight:900}
+  .cart-foot{border-top:1px solid var(--line);padding:16px 18px}
+  .tot{display:flex;justify-content:space-between;font-weight:900;margin-bottom:12px}
+  .checkout{width:100%;padding:14px 16px;border-radius:12px;background:#111;color:#fff;font-weight:900}
+  .hint{color:var(--muted);font-size:12px;margin-top:8px}
 
-  /* FOOTER */
-  footer{border-top:1px solid var(--line);padding:24px 0;color:var(--muted);text-align:center}
-  .footlinks a{color:var(--muted);margin:0 10px}
-  .footlinks a:hover{color:var(--text)}
-
-  /* Animations */
-  @keyframes fadeUp{to{opacity:1;transform:none}}
-  @keyframes glow{
-    0%,100%{box-shadow:0 0 0 rgba(212,175,55,.35)}
-    50%{box-shadow:0 0 36px rgba(212,175,55,.28)}
-  }
-
+  /* Responsive */
   @media (max-width:900px){
-    .hero .inner{grid-template-columns:1fr;padding:56px 0}
-    h1{font-size:38px}
-  }
-
-  /* Respect reduced motion */
-  @media (prefers-reduced-motion:reduce){
-    .btn.primary{animation:none}
-    .card{transition:none}
+    .hero-in{grid-template-columns:1fr;gap:18px;padding:28px 0}
+    .grid{grid-template-columns:1fr}
   }
 </style>
 </head>
-<body class="frame">
+<body>
 
-  <!-- NAV -->
-  <nav class="nav">
-    <div class="wrap navin">
-      <div class="brand">
-        <div class="ar">صحراء</div>
-        <div class="en">SAHARA PREMIUM WEAR</div>
-      </div>
-      <div class="links">
-        <a href="#shop">Shop</a>
-        <a href="https://instagram.com/saharapremiumwear" target="_blank" rel="noopener">Instagram</a>
-        <a href="#contact">Contact</a>
+<!-- Header -->
+<header class="nav">
+  <div class="wrap navin">
+    <div class="brand">SAHARA <span class="ar">صحراء</span></div>
+    <div class="links">
+      <a href="#shop">Shop</a>
+      <a href="#about">About</a>
+      <button class="cartbtn" id="openCart">Cart <span class="badge" id="cartCount">0</span></button>
+    </div>
+  </div>
+</header>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="wrap hero-in">
+    <div>
+      <p class="muted" style="font-weight:800;letter-spacing:.18em;margin:0">SAHARA PREMIUM WEAR</p>
+      <h1>Premium Desert-Inspired Fashion</h1>
+      <p class="sub">Modern minimal silhouettes with Arabic heritage. Heavyweight hoodie and matching wide-leg pants. Limited stock.</p>
+      <div class="cta">
+        <a class="btn primary" href="#shop">Shop Now</a>
+        <a class="btn ghost" href="#about">About Sahara</a>
       </div>
     </div>
-  </nav>
-
-  <!-- HERO -->
-  <header class="hero">
-    <div class="wrap inner">
-      <div class="logoLockup">
-        <div class="kicker">PREMIUM • DESERT • INSPIRED</div>
-        <h1>
-          <span class="ar">صحراء</span>
-          <span class="en">Premium Wear</span>
-        </h1>
-        <p class="sub">
-          Heavyweight embroidery. Wide-leg comfort. Modern minimalism with timeless Arabic symbols.
-        </p>
-        <div class="cta">
-          <a class="btn primary" href="https://wa.me/96181414496?text=Hi%20Sahara%20Premium%20Wear%2C%20I%20want%20to%20order." target="_blank" rel="noopener">SHOP NOW</a>
-          <a class="btn" href="https://instagram.com/saharapremiumwear" target="_blank" rel="noopener">Instagram</a>
-        </div>
-      </div>
-
-      <div class="tile">
-        <div class="small">New Drop</div>
-        <div class="title">Hoodie $85 • Pants $65</div>
-        <div class="note">Bundle <b style="color:var(--gold)">$140</b> — special set price. Limited stock.</div>
-      </div>
+    <div class="hero-img">
+      <!-- Use your key visual or keep hoodie image -->
+      <img src="IMG_5715.png" alt="Sahara premium hoodie">
     </div>
-  </header>
+  </div>
+</section>
 
-  <!-- SHOP -->
-  <main id="shop" class="wrap sec">
-    <div class="grid">
-      <!-- Hoodie -->
-      <article class="card reveal">
-        <div class="imgbox">
-          <img src="IMG_5715.png" alt="Sahara Premium Hoodie">
-        </div>
-        <div class="info">
-          <div class="title">Sahara Premium Hoodie — <span class="small">الصحراء</span></div>
+<!-- Products -->
+<section id="shop" class="wrap">
+  <div class="grid">
+    <!-- Hoodie -->
+    <article class="card" data-sku="hoodie" data-name="Sahara Premium Hoodie" data-price="85" data-img="IMG_5715.png">
+      <div class="pic"><img src="IMG_5715.png" alt="Sahara Premium Hoodie"></div>
+      <div class="info">
+        <div class="row">
+          <div>
+            <div class="title">Sahara Premium Hoodie — <span class="ar">الصحراء</span></div>
+            <div class="muted">450g heavyweight, refined embroidery</div>
+          </div>
           <div class="price">$85</div>
-          <div class="small">450g heavyweight with refined Arabic-inspired embroidery.</div>
-          <div class="sep"></div>
-          <div class="cta">
-            <a class="btn primary" href="https://wa.me/96181414496?text=Order%20Hoodie%20$85" target="_blank" rel="noopener">WhatsApp</a>
-            <a class="btn" href="https://instagram.com/saharapremiumwear" target="_blank" rel="noopener">DM on Instagram</a>
-          </div>
         </div>
-      </article>
+        <div class="controls">
+          <select class="size">
+            <option value="M">Size M</option>
+            <option value="L">Size L</option>
+            <option value="XL">Size XL</option>
+          </select>
+          <input class="qty" type="number" min="1" value="1" />
+          <button class="add">Add to Cart</button>
+        </div>
+      </div>
+    </article>
 
-      <!-- Pants -->
-      <article class="card reveal">
-        <div class="imgbox">
-          <img src="IMG_5717.png" alt="Sahara Premium Pants">
-        </div>
-        <div class="info">
-          <div class="title">Sahara Premium Pants — <span class="small">الصحراء</span></div>
+    <!-- Pants -->
+    <article class="card" data-sku="pants" data-name="Sahara Premium Pants" data-price="65" data-img="IMG_5717.png">
+      <div class="pic"><img src="IMG_5717.png" alt="Sahara Premium Pants"></div>
+      <div class="info">
+        <div class="row">
+          <div>
+            <div class="title">Sahara Premium Pants — <span class="ar">الصحراء</span></div>
+            <div class="muted">Wide-leg fit with matching embroidery</div>
+          </div>
           <div class="price">$65</div>
-          <div class="small">Modern wide-leg fit with matching embroidery and clean lines.</div>
-          <div class="sep"></div>
-          <div class="cta">
-            <a class="btn primary" href="https://wa.me/96181414496?text=Order%20Pants%20$65" target="_blank" rel="noopener">WhatsApp</a>
-            <a class="btn" href="https://instagram.com/saharapremiumwear" target="_blank" rel="noopener">DM on Instagram</a>
+        </div>
+        <div class="controls">
+          <select class="size">
+            <option value="M">Size M</option>
+            <option value="L">Size L</option>
+            <option value="XL">Size XL</option>
+          </select>
+          <input class="qty" type="number" min="1" value="1" />
+          <button class="add">Add to Cart</button>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- About -->
+<section id="about" class="wrap" style="padding-bottom:80px">
+  <div style="border:1px solid var(--line);border-radius:16px;padding:22px;background:#fff">
+    <h3 style="margin:0 0 6px">About Sahara</h3>
+    <p class="muted" style="margin:0">Sahara blends timeless Arabic symbols with modern minimalism — crafted for durability, comfort, and refined everyday wear.</p>
+  </div>
+</section>
+
+<!-- Cart Drawer -->
+<aside class="cart" id="cartDrawer" aria-hidden="true">
+  <div class="cart-head">
+    <strong>Cart</strong>
+    <button class="btnsm" id="closeCart">Close</button>
+  </div>
+  <div class="cart-items" id="cartItems"></div>
+  <div class="cart-foot">
+    <div class="tot"><span>Subtotal</span><span id="cartTotal">$0</span></div>
+    <button class="checkout" id="checkoutBtn">Checkout</button>
+    <div class="hint">This is a visual cart. You can connect real checkout later (Shopify, Stripe, or WhatsApp).</div>
+  </div>
+</aside>
+
+<script>
+  // --- Simple Visual Cart ---
+  const state = { items: [] }; // {sku,name,price,img,size,qty}
+  const cartBtn = document.getElementById('openCart');
+  const cartDrawer = document.getElementById('cartDrawer');
+  const closeCart = document.getElementById('closeCart');
+  const cartItems = document.getElementById('cartItems');
+  const cartTotal = document.getElementById('cartTotal');
+  const cartCount = document.getElementById('cartCount');
+  const checkoutBtn = document.getElementById('checkoutBtn');
+
+  function format(n){ return '$' + n.toFixed(0); }
+
+  function openCart(){ cartDrawer.classList.add('open'); cartDrawer.setAttribute('aria-hidden','false'); }
+  function closeCartFn(){ cartDrawer.classList.remove('open'); cartDrawer.setAttribute('aria-hidden','true'); }
+
+  cartBtn.addEventListener('click', openCart);
+  closeCart.addEventListener('click', closeCartFn);
+
+  // Add to cart buttons
+  document.querySelectorAll('.card .add').forEach(btn=>{
+    btn.addEventListener('click', e=>{
+      const card = e.target.closest('.card');
+      const sku  = card.dataset.sku;
+      const name = card.dataset.name;
+      const price= Number(card.dataset.price);
+      const img  = card.dataset.img;
+      const size = card.querySelector('.size').value;
+      const qty  = Math.max(1, Number(card.querySelector('.qty').value||1));
+
+      const key = sku + '|' + size;
+      const found = state.items.find(it=> (it.sku+'|'+it.size)===key);
+      if(found) found.qty += qty;
+      else state.items.push({sku,name,price,img,size,qty});
+      render();
+      openCart();
+    });
+  });
+
+  function changeQty(key,delta){
+    const it = state.items.find(i=> (i.sku+'|'+i.size)===key);
+    if(!it) return;
+    it.qty += delta;
+    if(it.qty<=0) state.items = state.items.filter(i=> (i.sku+'|'+i.size)!==key);
+    render();
+  }
+
+  function render(){
+    // count + total
+    let count = 0, total = 0;
+    state.items.forEach(i=>{ count += i.qty; total += i.price*i.qty; });
+    cartCount.textContent = count;
+    cartTotal.textContent = format(total);
+
+    // items
+    if(state.items.length===0){
+      cartItems.innerHTML = '<p class="muted" style="padding:10px 0 16px">Your cart is empty.</p>';
+      return;
+    }
+    cartItems.innerHTML = state.items.map(i=>{
+      const key = i.sku+'|'+i.size;
+      return `
+        <div class="ci">
+          <img src="${i.img}" alt="">
+          <div>
+            <div class="name">${i.name}</div>
+            <div class="meta">Size ${i.size} · ${format(i.price)}</div>
           </div>
-        </div>
-      </article>
-    </div>
+          <div class="qtybox">
+            <button class="btnsm" onclick="changeQty('${key}',-1)">−</button>
+            <strong>${i.qty}</strong>
+            <button class="btnsm" onclick="changeQty('${key}',1)">+</button>
+          </div>
+        </div>`;
+    }).join('');
+  }
 
-    <!-- Bundle -->
-    <div class="card reveal" style="margin-top:18px;">
-      <div class="info">
-        <div class="title" style="font-size:1.2rem;">Complete the Look — Set (Hoodie + Pants)</div>
-        <div class="price" style="font-size:1.25rem;">$140</div>
-        <div class="small">Save with the matching full Sahara vibe.</div>
-        <div class="sep"></div>
-        <div class="cta">
-          <a class="btn primary" href="https://wa.me/96181414496?text=Order%20Set%20$140" target="_blank" rel="noopener">Order on WhatsApp</a>
-          <a class="btn" href="https://instagram.com/saharapremiumwear" target="_blank" rel="noopener">DM on Instagram</a>
-        </div>
-      </div>
-    </div>
-  </main>
+  // Optional: simulate checkout (no external calls)
+  checkoutBtn.addEventListener('click', ()=>{
+    if(state.items.length===0) return;
+    alert('This is a visual cart only. Connect to real checkout later.');
+  });
 
-  <!-- CONTACT -->
-  <section id="contact" class="wrap sec" style="padding-bottom:8px;">
-    <div class="card reveal" style="padding:0">
-      <div class="info">
-        <div class="title">Questions? Sizes? Wholesale?</div>
-        <div class="small">Message us directly — we reply fast.</div>
-        <div class="cta" style="margin-top:12px;">
-          <a class="btn primary" href="https://wa.me/96181414496" target="_blank" rel="noopener">WhatsApp</a>
-          <a class="btn" href="https://instagram.com/saharapremiumwear" target="_blank" rel="noopener">Instagram</a>
-        </div>
-      </div>
-    </div>
-  </section>
+  // expose for inline onclick
+  window.changeQty = changeQty;
+</script>
 
-  <footer>
-    <div class="footlinks">
-      <a href="#shop">Shop</a> •
-      <a href="https://instagram.com/saharapremiumwear" target="_blank" rel="noopener">Instagram</a> •
-      <a href="mailto:contact@saharapremiumwear.com">Email</a>
-    </div>
-    <div style="margin-top:8px">© 2025 Sahara Premium Wear — All rights reserved.</div>
-  </footer>
-
-  <!-- Tiny scroll-reveal script -->
-  <script>
-    const els=[...document.querySelectorAll('.reveal')];
-    const io=new IntersectionObserver(entries=>{
-      entries.forEach(e=>{
-        if(e.isIntersecting){e.target.classList.add('show');io.unobserve(e.target);}
-      });
-    },{threshold:.18});
-    els.forEach(el=>io.observe(el));
-  </script>
 </body>
 </html>
