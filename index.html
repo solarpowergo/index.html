@@ -8,74 +8,102 @@
 <meta name="theme-color" content="#D4AF37">
 <style>
   :root{
-    --bg:#0b0b0b;         /* deep black */
-    --panel:#111010;      /* card bg */
-    --line:#2a241b;       /* thin borders */
-    --gold:#d4af37;       /* main gold */
-    --gold-2:#b98c24;     /* darker gold */
-    --text:#f3efe7;       /* main text */
-    --muted:#bfae97;      /* secondary text */
+    --bg:#0a0a0a;          /* deep black */
+    --panel:#111010;       /* card bg */
+    --line:#262018;        /* thin borders */
+    --gold:#d4af37;        /* warm gold */
+    --gold-2:#b98c24;      /* darker gold */
+    --text:#f3efe7;        /* ivory */
+    --muted:#b9ad99;       /* muted text */
+    --shadow:0 18px 60px rgba(0,0,0,.45);
   }
   *,*:before,*:after{box-sizing:border-box}
-  html,body{margin:0;background:var(--bg);color:var(--text);font-family: ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial}
+  html,body{margin:0;background:var(--bg);color:var(--text);
+    font-family: ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial}
   a{color:inherit;text-decoration:none}
-  .wrap{max-width:1120px;margin:0 auto;padding:0 20px}
 
-  /* Decorative full-page frame */
-  .frame:before,.frame:after{content:"";position:fixed;inset:12px;border:1px solid rgba(212,175,55,.35);pointer-events:none;border-radius:6px}
-  .frame:after{inset:24px;border-color:rgba(212,175,55,.18)}
+  /* Lux frame */
+  .frame:before,.frame:after{content:"";position:fixed;inset:14px;
+    border:1px solid rgba(212,175,55,.32);pointer-events:none;border-radius:8px}
+  .frame:after{inset:26px;border-color:rgba(212,175,55,.18)}
 
-  /* Nav */
-  .nav{position:sticky;top:0;z-index:50;background:rgba(11,11,11,.7);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+
+  /* NAV */
+  .nav{position:sticky;top:0;z-index:50;background:rgba(10,10,10,.6);
+       backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
   .navin{height:68px;display:flex;align-items:center;justify-content:space-between}
   .brand{display:flex;flex-direction:column;line-height:1}
-  .brand .ar{font-weight:900;color:var(--gold);font-size:26px;letter-spacing:.5px}
+  .brand .ar{font-weight:900;color:var(--gold);font-size:26px;letter-spacing:.6px}
   .brand .en{color:var(--muted);letter-spacing:.30em;margin-top:6px}
   .links a{margin-left:18px;color:var(--muted);font-weight:700}
   .links a:hover{color:var(--text)}
 
-  /* Hero */
-  .hero{border-bottom:1px solid var(--line);
-        background: radial-gradient(1200px 600px at 50% -220px, rgba(212,175,55,.16), transparent 60%);}
-  .hero .inner{display:grid;grid-template-columns:1.15fr .85fr;gap:28px;padding:56px 0}
+  /* HERO */
+  .hero{
+    position:relative;border-bottom:1px solid var(--line);
+    background:
+      radial-gradient(1200px 600px at 50% -220px, rgba(212,175,55,.16), transparent 60%);
+  }
+  .hero .inner{display:grid;grid-template-columns:1.2fr .8fr;gap:32px;padding:72px 0}
+  .logoLockup{opacity:0;transform:translateY(10px);animation:fadeUp .9s .1s both}
   .kicker{color:var(--muted);text-transform:uppercase;letter-spacing:.25em;font-size:12px}
-  h1{margin:6px 0 12px;line-height:1.05;font-size:44px}
+  h1{margin:8px 0 12px;line-height:1.05;font-size:48px}
   h1 .ar{color:var(--gold);font-weight:900;letter-spacing:.6px;display:block}
   h1 .en{font-weight:800;display:block}
-  .sub{color:var(--muted);max-width:52ch}
-  .cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:18px}
-  .btn{padding:12px 18px;border-radius:12px;border:1.5px solid var(--gold);font-weight:900;letter-spacing:.04em;transition:.2s}
-  .btn.primary{background:linear-gradient(180deg,var(--gold),var(--gold-2));color:#1c1408}
-  .btn:hover{transform:translateY(-1px);box-shadow:0 8px 24px rgba(212,175,55,.18)}
+  .sub{color:var(--muted);max-width:56ch}
+  .cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:20px}
+  .btn{padding:13px 20px;border-radius:12px;border:1.5px solid var(--gold);
+       font-weight:900;letter-spacing:.04em;transition:.25s}
+  .btn.primary{background:linear-gradient(180deg,var(--gold),var(--gold-2));color:#1c1408;
+               box-shadow:0 0 0 rgba(212,175,55,.45);animation:glow 2.6s ease-in-out infinite}
+  .btn:hover{transform:translateY(-1px);box-shadow:0 10px 26px rgba(212,175,55,.18)}
 
-  /* Cards grid */
-  .sec{padding:32px 0}
-  .grid{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
-  .card{background:linear-gradient(180deg,#141311,#0f0e0d);border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:0 14px 36px rgba(0,0,0,.35)}
+  /* INFO tile */
+  .tile{align-self:center;background:linear-gradient(180deg,#141311,#0e0d0c);
+        border:1px solid var(--line);border-radius:18px;padding:18px 18px 20px;
+        box-shadow:var(--shadow)}
+  .tile .small{color:var(--muted);text-transform:uppercase;letter-spacing:.18em;font-size:12px}
+  .tile .title{font-weight:800;margin-top:4px}
+  .tile .note{color:var(--muted);margin-top:6px}
+
+  /* SECTIONS */
+  .sec{padding:36px 0}
+  .grid{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+  .card{background:linear-gradient(180deg,#141311,#0f0e0d);
+        border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:var(--shadow);
+        transform:translateY(12px);opacity:0}
+  .card.show{transform:none;opacity:1;transition:.6s ease}
   .imgbox{aspect-ratio:1/1;background:#0b0a09;display:flex;align-items:center;justify-content:center}
   .imgbox img{width:100%;height:100%;object-fit:cover}
-  .info{padding:16px}
+  .info{padding:18px}
   .title{font-weight:800;letter-spacing:.02em}
   .price{color:var(--gold);font-weight:900;margin-top:4px}
-  .small{color:var(--muted);font-size:.92rem}
+  .small{color:var(--muted);font-size:.94rem}
+  .sep{height:1px;background:linear-gradient(90deg,transparent,rgba(212,175,55,.35),transparent);margin:18px 0}
 
-  /* Pricing banner */
-  .banner{margin-top:10px;border:1px solid var(--line);border-radius:14px;padding:16px;background:linear-gradient(180deg,#141311,#100f0d)}
-  .banner strong{color:var(--gold)}
-
-  /* Footer */
-  footer{border-top:1px solid var(--line);padding:22px 0;color:var(--muted);text-align:center}
+  /* FOOTER */
+  footer{border-top:1px solid var(--line);padding:24px 0;color:var(--muted);text-align:center}
   .footlinks a{color:var(--muted);margin:0 10px}
   .footlinks a:hover{color:var(--text)}
 
-  /* Mobile tweaks */
-  @media (max-width:880px){
-    .hero .inner{grid-template-columns:1fr;padding:36px 0}
-    h1{font-size:36px}
+  /* Animations */
+  @keyframes fadeUp{to{opacity:1;transform:none}}
+  @keyframes glow{
+    0%,100%{box-shadow:0 0 0 rgba(212,175,55,.35)}
+    50%{box-shadow:0 0 36px rgba(212,175,55,.28)}
   }
 
-  /* Thin gold separators */
-  .sep{height:1px;background:linear-gradient(90deg,transparent,rgba(212,175,55,.35),transparent);margin:22px 0}
+  @media (max-width:900px){
+    .hero .inner{grid-template-columns:1fr;padding:56px 0}
+    h1{font-size:38px}
+  }
+
+  /* Respect reduced motion */
+  @media (prefers-reduced-motion:reduce){
+    .btn.primary{animation:none}
+    .card{transition:none}
+  }
 </style>
 </head>
 <body class="frame">
@@ -98,7 +126,7 @@
   <!-- HERO -->
   <header class="hero">
     <div class="wrap inner">
-      <div>
+      <div class="logoLockup">
         <div class="kicker">PREMIUM • DESERT • INSPIRED</div>
         <h1>
           <span class="ar">صحراء</span>
@@ -108,31 +136,31 @@
           Heavyweight embroidery. Wide-leg comfort. Modern minimalism with timeless Arabic symbols.
         </p>
         <div class="cta">
-          <a class="btn primary" href="https://wa.me/96181414496?text=Hi%20Sahara%20Premium%20Wear,%20I%20want%20to%20order." target="_blank" rel="noopener">SHOP NOW</a>
+          <a class="btn primary" href="https://wa.me/96181414496?text=Hi%20Sahara%20Premium%20Wear%2C%20I%20want%20to%20order." target="_blank" rel="noopener">SHOP NOW</a>
           <a class="btn" href="https://instagram.com/saharapremiumwear" target="_blank" rel="noopener">Instagram</a>
         </div>
       </div>
 
-      <div class="banner">
+      <div class="tile">
         <div class="small">New Drop</div>
         <div class="title">Hoodie $85 • Pants $65</div>
-        <div class="small">Bundle <strong>$140</strong> — special set price. Limited stock.</div>
+        <div class="note">Bundle <b style="color:var(--gold)">$140</b> — special set price. Limited stock.</div>
       </div>
     </div>
   </header>
 
-  <!-- PRODUCTS -->
+  <!-- SHOP -->
   <main id="shop" class="wrap sec">
     <div class="grid">
       <!-- Hoodie -->
-      <article class="card">
+      <article class="card reveal">
         <div class="imgbox">
           <img src="IMG_5715.png" alt="Sahara Premium Hoodie">
         </div>
         <div class="info">
           <div class="title">Sahara Premium Hoodie — <span class="small">الصحراء</span></div>
           <div class="price">$85</div>
-          <div class="small">450g heavyweight. Refined Arabic-inspired embroidery.</div>
+          <div class="small">450g heavyweight with refined Arabic-inspired embroidery.</div>
           <div class="sep"></div>
           <div class="cta">
             <a class="btn primary" href="https://wa.me/96181414496?text=Order%20Hoodie%20$85" target="_blank" rel="noopener">WhatsApp</a>
@@ -142,7 +170,7 @@
       </article>
 
       <!-- Pants -->
-      <article class="card">
+      <article class="card reveal">
         <div class="imgbox">
           <img src="IMG_5717.png" alt="Sahara Premium Pants">
         </div>
@@ -160,11 +188,11 @@
     </div>
 
     <!-- Bundle -->
-    <div class="card" style="margin-top:18px;">
+    <div class="card reveal" style="margin-top:18px;">
       <div class="info">
         <div class="title" style="font-size:1.2rem;">Complete the Look — Set (Hoodie + Pants)</div>
         <div class="price" style="font-size:1.25rem;">$140</div>
-        <div class="small">Special set pricing. Save and match the full Sahara vibe.</div>
+        <div class="small">Save with the matching full Sahara vibe.</div>
         <div class="sep"></div>
         <div class="cta">
           <a class="btn primary" href="https://wa.me/96181414496?text=Order%20Set%20$140" target="_blank" rel="noopener">Order on WhatsApp</a>
@@ -174,14 +202,16 @@
     </div>
   </main>
 
-  <!-- CONTACT / FOOTER -->
+  <!-- CONTACT -->
   <section id="contact" class="wrap sec" style="padding-bottom:8px;">
-    <div class="banner">
-      <div class="title">Questions? Sizes? Wholesale?</div>
-      <div class="small">Message us directly — we reply fast.</div>
-      <div class="cta" style="margin-top:12px;">
-        <a class="btn primary" href="https://wa.me/96181414496" target="_blank" rel="noopener">WhatsApp</a>
-        <a class="btn" href="https://instagram.com/saharapremiumwear" target="_blank" rel="noopener">Instagram</a>
+    <div class="card reveal" style="padding:0">
+      <div class="info">
+        <div class="title">Questions? Sizes? Wholesale?</div>
+        <div class="small">Message us directly — we reply fast.</div>
+        <div class="cta" style="margin-top:12px;">
+          <a class="btn primary" href="https://wa.me/96181414496" target="_blank" rel="noopener">WhatsApp</a>
+          <a class="btn" href="https://instagram.com/saharapremiumwear" target="_blank" rel="noopener">Instagram</a>
+        </div>
       </div>
     </div>
   </section>
@@ -194,5 +224,16 @@
     </div>
     <div style="margin-top:8px">© 2025 Sahara Premium Wear — All rights reserved.</div>
   </footer>
+
+  <!-- Tiny scroll-reveal script -->
+  <script>
+    const els=[...document.querySelectorAll('.reveal')];
+    const io=new IntersectionObserver(entries=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting){e.target.classList.add('show');io.unobserve(e.target);}
+      });
+    },{threshold:.18});
+    els.forEach(el=>io.observe(el));
+  </script>
 </body>
 </html>
